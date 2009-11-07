@@ -1,7 +1,7 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
 # Copyright (C) 2004 Wind River
-# Plugin written by http://TWiki.org/cgi-bin/view/Main/CrawfordCurrie
+# Plugin written by http://Foswiki.org/cgi-bin/view/Main/CrawfordCurrie
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -16,22 +16,22 @@
 #
 # Plugin that supports content management operations
 #
-package TWiki::Plugins::OrphansPlugin;
+package Foswiki::Plugins::OrphansPlugin;
 
 use vars qw( $VERSION $RELEASE $SHORTDESCRIPTION );
 
 $VERSION = '$Rev$';
-$RELEASE = '4.2.0';
+$RELEASE = '07 Nov 2009';
 $SHORTDESCRIPTION = 'Locate and manage orphaned topics';
 
 sub initPlugin {
 
     # check for Plugins.pm versions
-    if( $TWiki::Plugins::VERSION < 1.1 ) {
+    if( $Foswiki::Plugins::VERSION < 1.1 ) {
         die "Require Plugins.pm >= 1.1";
     }
 
-    TWiki::Func::registerTagHandler('FINDORPHANS', \&_findOrphans);
+    Foswiki::Func::registerTagHandler('FINDORPHANS', \&_findOrphans);
 
     return 1;
 }
@@ -39,8 +39,8 @@ sub initPlugin {
 # Handle the "FINDORPHANS" tag
 sub _findOrphans {
     my ( $session, $params, $topic, $web ) = @_;
-    require TWiki::Plugins::OrphansPlugin::Orphans;
-    my $orphans = new TWiki::Plugins::OrphansPlugin::Orphans( $web, $params );
+    require Foswiki::Plugins::OrphansPlugin::Orphans;
+    my $orphans = new Foswiki::Plugins::OrphansPlugin::Orphans( $web, $params );
     return $orphans->tabulate( $params );
 }
 

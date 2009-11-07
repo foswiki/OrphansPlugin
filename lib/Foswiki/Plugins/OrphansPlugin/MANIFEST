@@ -1,0 +1,5 @@
+pub/System/OrphansPlugin/wikiringlogo20x20.png 0644
+data/System/OrphansPlugin.txt 0644
+data/System/ManageOrphanedPages.txt 0644
+lib/Foswiki/Plugins/OrphansPlugin.pm 0644
+lib/Foswiki/Plugins/OrphansPlugin/Orphans.pm 0644

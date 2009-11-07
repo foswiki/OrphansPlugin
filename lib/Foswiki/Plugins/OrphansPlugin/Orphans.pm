@@ -19,7 +19,7 @@
 # Class that handles the location and display of orphaned pages
 #
 use strict;
-use TWiki::Func;
+use Foswiki::Func;
 
 =pod
 
@@ -38,13 +38,13 @@ process from.
 Constructor. Processes the given web and generates an object that contains the
 results of the orphan search in that web.
 
----++ =tabulate ( $fmt ) -> TWiki ML table=
+---++ =tabulate ( $fmt ) -> Foswiki ML table=
    * =$fmt= Unparsed parameters to the %ORPHANS tag
 Generates a table of results according to directions in the parameters.
 
 =cut
 
-package TWiki::Plugins::OrphansPlugin::Orphans;
+package Foswiki::Plugins::OrphansPlugin::Orphans;
 
 # PUBLIC constructor
 sub new {
@@ -57,15 +57,15 @@ sub new {
 
     my $topic;
 
-    foreach $topic ( TWiki::Func::getTopicList( $this->{_web} ) ) {
+    foreach $topic ( Foswiki::Func::getTopicList( $this->{_web} ) ) {
         $this->{$topic} = 0;
     }
 
-    my $wikiName = TWiki::Func::getWikiName();
+    my $wikiName = Foswiki::Func::getWikiName();
 
     # Root of a URL that points to topics in this web. Used to detect
     # absolute URL references to topics
-    $this->{_hereUrl} = TWiki::Func::getScriptUrl( $this->{_web}, "DUMMY", "view" );
+    $this->{_hereUrl} = Foswiki::Func::getScriptUrl( $this->{_web}, "DUMMY", "view" );
     $this->{_hereUrl} =~ s/\/DUMMY$//o;
 
     my $allrefs = $params->{allrefs};
@@ -75,41 +75,41 @@ sub new {
     # is secure, because we don't admit to where the reference to a topic came
     # from.
     my @webs = $this->{_allwebs} ?
-      TWiki::Func::getPublicWebList() : ( $this->{_web} );
+      Foswiki::Func::getPublicWebList() : ( $this->{_web} );
     foreach my $fromweb ( @webs ) {
         foreach $topic ( grep( !/^WebStatistics$/,
-                        TWiki::Func::getTopicList( $fromweb )) ) {
+                        Foswiki::Func::getTopicList( $fromweb )) ) {
 
             # This code (or similar) is a subset of code that is
             # duplicated widely. For example, Store.pm updateReferingPages
 
-            my $text = TWiki::Func::readTopicText( $fromweb, $topic, undef, 1 );
+            my $text = Foswiki::Func::readTopicText( $fromweb, $topic, undef, 1 );
 
             # kill anchors
-            $text =~ s/^\#$TWiki::regex{wikiWordRegex}//go;
+            $text =~ s/^\#$Foswiki::regex{wikiWordRegex}//go;
             # kill verbatim & noautolink
             $text =~ s/<(verbatim|noautolink)>.*?<\/\1>//sgo;
             # kill topic parent & info
             $text =~ s/^%META:TOPIC.*$//go;
 
             # Handle absolute URLs
-            $text =~ s/(^|[\-\*\s\(])[a-z]+:\/\/\S*\/$this->{_web}\/($TWiki::regex{wikiWordRegex})\//$this->_wikiword($2,$fromweb,$topic)/geo;
+            $text =~ s/(^|[\-\*\s\(])[a-z]+:\/\/\S*\/$this->{_web}\/($Foswiki::regex{wikiWordRegex})\//$this->_wikiword($2,$fromweb,$topic)/geo;
             # Handle [[]]
             $text =~ s/\[\[([^\]]+)\](\[[^\]]+\])?\]/$this->_spaced($1,$fromweb,$topic)/geo;
             # Note that we add " to the following RE's to ensure we pick up topic
             # references embedded in parameters to tags
-            $text =~ s/[\s\(\"]$this->{_web}\.($TWiki::regex{wikiWordRegex})/$this->_wikiword($1,$this->{_web},$topic)/ge;
+            $text =~ s/[\s\(\"]$this->{_web}\.($Foswiki::regex{wikiWordRegex})/$this->_wikiword($1,$this->{_web},$topic)/ge;
 
             # Kill <noautolink>
             $text =~ s/\n<noautolink>.*?\n<\/noautolink>//sgo;
 
             # Handle plain wikiwords
-            $text =~ s/[\s\(\"]($TWiki::regex{wikiWordRegex})/$this->_wikiword($1,$fromweb,$topic)/geo;
+            $text =~ s/[\s\(\"]($Foswiki::regex{wikiWordRegex})/$this->_wikiword($1,$fromweb,$topic)/geo;
 
             # Handle acronyms/abbreviations of three or more letters
             # 'Web.ABBREV' link:
-            $text =~ s/[\s\(\"]$this->{_web}\.($TWiki::regex{abbrevRegex})/$this->_wikiword($1,$fromweb,$topic)/ge;
-            $text =~ s/[\s\(\"]($TWiki::regex{abbrevRegex})/$this->_wikiword($1,$fromweb,$topic)/geo;
+            $text =~ s/[\s\(\"]$this->{_web}\.($Foswiki::regex{abbrevRegex})/$this->_wikiword($1,$fromweb,$topic)/ge;
+            $text =~ s/[\s\(\"]($Foswiki::regex{abbrevRegex})/$this->_wikiword($1,$fromweb,$topic)/geo;
         }
     }
     return $this;
@@ -132,7 +132,7 @@ sub _link {
     my ( $this, $text, $web, $topic ) = @_;
     my $thisweb = $this->{_web};
 
-    $text =~ s/^.*\b$thisweb[\/\.]($TWiki::regex{wikiWordRegex})\b/$1/;
+    $text =~ s/^.*\b$thisweb[\/\.]($Foswiki::regex{wikiWordRegex})\b/$1/;
     if( $text ne "" ) {
         $this->_wikiword( $text, $web, $topic ) if ( $text =~ m/^\w+$/o );
     }

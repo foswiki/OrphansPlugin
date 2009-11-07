@@ -6,7 +6,7 @@ Subversion. Please add comments/questions/remarks to the Dev topic instead.
 <a href="http://wikiring.com"><img src="%ATTACHURL%/logo.png" style="float:right" /></a>
 %SHORTDESCRIPTION%
 
-This Plugin assists in the management of topics within a TWiki web by locating orphaned topics (topics that have no parent, or their parent has been deleted).
+This Plugin assists in the management of topics within a Foswiki web by locating orphaned topics (topics that have no parent, or their parent has been deleted).
 
 Orphaned topics are displayed in a table, optionally with a reference count. Example:
 <literal>
@@ -35,7 +35,7 @@ Write <code> %<nop>FINDORPHANS{ _parameters_ }% </code> anywhere in a topic.
 
 Supported parameters:
 | *Parameter and Values* | *Description* | *Default* |
-| =web="..."= | TWiki web to search | Current web ="%WEB%"= |
+| =web="..."= | Foswiki web to search | Current web ="%WEB%"= |
 | =allwebs="on"= %BR% =allwebs="off"= | Searches in all *public* webs for references to topic when detecting orphans | ="off"= |
 | =allrefs="on"= %BR% =allrefs="off"= | Analyses count of references to each topic when searching for orphans, and includes them in the output table | ="off"= |
 
@@ -51,7 +51,7 @@ When the topic is viewed the Plugin will generate a table of topics in the selec
 <!--
 ---++ Settings
 	* One line description, shown in the %SYSTEMWEB%.TextFormattingRules topic:
-		* Set SHORTDESCRIPTION = Locate orphaned topics in TWiki webs
+		* Set SHORTDESCRIPTION = Locate orphaned topics in Foswiki webs
 -->
 
 ---++ Plugin Installation Instructions
@@ -60,16 +60,16 @@ When the topic is viewed the Plugin will generate a table of topics in the selec
 	* Test if the plugin is correctly installed by visiting the %SYSTEMWEB%.ManageOrphanedPages topic, select a web and see if the table is expanded correctly.
 
 ---++ Plugin Info
-Another great TWiki extension from the <a style="text-decoration:none" href="http://wikiring.com"><img src="%ATTACHURLPATH%/wikiringlogo20x20.png" alt="" /> *WikiRing* </a> - working together to improve your wiki experience!
+Another great Foswiki extension from the <a style="text-decoration:none" href="http://wikiring.com"><img src="%ATTACHURLPATH%/wikiringlogo20x20.png" alt="" /> *WikiRing* </a> - working together to improve your wiki experience!
 
 Many thanks to the following sponsors for supporting this work:
    * [[http://windriver.com][Wind River]]
 
-|  Plugin Author: | TWiki:Main.CrawfordCurrie |
+|  Plugin Author: | Foswiki:Main.CrawfordCurrie |
 |  Plugin Version: | %$VERSION% |
 |  Change History: | <!-- specify latest version first -->&nbsp; |
 |  7 Sep 2007 | Bugs:Item4571 corrected noautolink handling, and hopefully improved UTF-8 handling as well |
-|  11498 | Ported to TWiki-4 |
+|  11498 | Ported to Foswiki-4 |
 |  25 Mar 2004: | Initial version |
 |  Dependencies: | %$DEPENDENCIES% |
 |  Perl Version: | 5.008 and up |

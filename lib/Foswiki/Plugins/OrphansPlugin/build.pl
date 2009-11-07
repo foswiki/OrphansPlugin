@@ -10,7 +10,7 @@ BEGIN {
   }
 }
 
-use TWiki::Contrib::Build;
+use Foswiki::Contrib::Build;
 
-$build = new TWiki::Contrib::Build("OrphansPlugin");
+$build = new Foswiki::Contrib::Build("OrphansPlugin");
 $build->build($build->{target});
