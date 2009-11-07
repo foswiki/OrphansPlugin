@@ -1,16 +1,37 @@
 #!/usr/bin/perl -w
-#
-# Build file for OrphansPlugin
-#
-package OrphansPluginBuild;
+
+# Standard preamble
+use strict;
 
 BEGIN {
-  foreach my $pc (split(/:/, $ENV{FOSWIKI_LIBS})) {
-    unshift @INC, $pc;
-  }
+    unshift @INC, split( /:/, $ENV{FOSWIKI_LIBS} );
 }
 
 use Foswiki::Contrib::Build;
 
-$build = new Foswiki::Contrib::Build("OrphansPlugin");
+# Declare our build package
+package BuildBuild;
+use base qw( Foswiki::Contrib::Build );
+
+sub new {
+    my $class = shift;
+    return bless( $class->SUPER::new( "OrphansPlugin" ), $class );
+}
+
+# Example: Override the build target
+sub target_build {
+    my $this = shift;
+
+    $this->SUPER::target_build();
+
+    # Do other build stuff here
+}
+
+package main;
+
+# Create the build object
+my $build = new BuildBuild();
+
+# Build the target on the command line, or the default target
 $build->build($build->{target});
+

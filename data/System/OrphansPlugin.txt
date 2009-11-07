@@ -27,7 +27,9 @@ Orphaned topics are displayed in a table, optionally with a reference count. Exa
 
 
 ---++ Tools
-The plugin is used from a page in the %SYSTEMWEB% web, %SYSTEMWEB%.ManageOrphanedPages. Normally you should be able to get away with just this topic, though you can use the plugin from any topic in any web if you want to.
+The plugin is used from a page in the %SYSTEMWEB% web, %SYSTEMWEB%.ManageOrphanedPages.
+
+There is also %SYSTEMWEB%.WebOrphans, which may be included from a similarly named topic in other webs. By default %TOPIC% adds a WebOrphans topic to your System, Main, Sandbox and _default webs.
 
 ---++ Syntax Rules
 
